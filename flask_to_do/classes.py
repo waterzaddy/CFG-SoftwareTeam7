@@ -1,4 +1,4 @@
-""" CLASS """
+""" CLASSES """
 
 class VirtualPet:
     def __init__(self, name):
@@ -28,3 +28,11 @@ class VirtualPet:
 
     def get_status(self):
         return {"name": self.name, "health": self.health, "happiness": self.happiness}
+
+
+class Counter:
+    def __init__(self):
+        self.health_counter = 0
+        self.happiness_counter = 0
+        self.max_value = 5
+        self.min_value = 0
