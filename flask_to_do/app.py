@@ -10,12 +10,13 @@ todos_happiness = [{"task": "Sample task", "done": False}]
 
 """ CLASS INSTANCES """
 
-pet_name = "Gizmo"
-pet = VirtualPet(pet_name)
+# creating pet instance. not in use yet (to be used for booster buttons)
+pet = VirtualPet("Gizmo")
+# creating instance for health/happiness counters. Variables can't be reassigned so this needs to be through classes
 counter = Counter()
-# Can mutate variables but can't reassign
 
-""" APP ROUTE """
+
+""" APP ROUTES """
 
 
 @app.route("/")
@@ -103,9 +104,6 @@ def check_happiness(index):
 def delete_happiness(index):
     del todos_happiness[index]
     return redirect(url_for("index"))
-
-
-""" CLASS INSTANCE """
 
 
 """ RUN APP """
