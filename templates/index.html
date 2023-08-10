@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Virtual Pet Web App</title>
+</head>
+<body>
+    <h1>Welcome to Your Virtual Pet Web App</h1>
+    <h2>{{ pet.name }}</h2>
+
+    <div>
+        <h3>Actions:</h3>
+        <a href="/feed">Feed</a>
+        <a href="/water">Water</a>
+        <a href="/exercise">Exercise</a>
+        <a href="/hug">Hug</a>
+    </div>
+
+    <div>
+        <h3>Health Status:</h3>
+        <p>{{ pet.health }}%</p>
+    </div>
+
+    <div>
+        <h3>Happiness Status:</h3>
+        <p>{{ pet.happiness }}%</p>
+        {% if quote %}
+        <p>Quote: {{ quote }}</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>
