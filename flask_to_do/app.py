@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
-from classes import VirtualPet, Counter
+from classes import VirtualPet
+from functions import get_inspo_quote
+import requests
 
 """ VARIABLES """
 
@@ -11,9 +13,7 @@ todos_happiness = [{"task": "Sample task", "done": False}]
 """ CLASS INSTANCES """
 
 # creating pet instance. not in use yet (to be used for booster buttons)
-pet = VirtualPet("Gizmo")
-# creating instance for health/happiness counters. Variables can't be reassigned so this needs to be through classes
-counter = Counter()
+pet = VirtualPet("Your Virtual Pet", health=40, happiness=40)
 
 
 """ APP ROUTES """
@@ -21,7 +21,7 @@ counter = Counter()
 
 @app.route("/")
 def index():
-    return render_template("index.html", todos_health=todos_health, todos_happiness=todos_happiness, health_counter=counter.health_counter, happiness_counter=counter.happiness_counter)
+    return render_template("index.html", todos_health=todos_health, todos_happiness=todos_happiness, pet=pet)
 
 
 """ HEALTH: ADD, EDIT, DELETE, CHECK FUNCTIONS"""
@@ -47,24 +47,22 @@ def edit_health(index):
 @app.route("/check_health/<int:index>")
 def check_health(index):
     todos_health[index]["done"] = not todos_health[index]["done"]
-    if counter.max_value > counter.health_counter >= counter.min_value:
+    if pet.max_status >= pet.health >= pet.min_status:
         if todos_health[index]["done"]:
-            counter.health_counter += 1
+            pet.health = min(pet.max_status, pet.health + 5)
         else:
-            counter.health_counter -= 1
-    else:
-        pass
-    return redirect(url_for("index", health_counter=counter.health_counter))
+            pet.health = min(pet.max_status, pet.health - 5)
+    return redirect(url_for("index", pet=pet))
 
 
 @app.route("/delete_health/<int:index>")
 def delete_health(index):
     if todos_health[index]["done"]:
-        counter.health_counter -= 1
+        pet.health = min(pet.max_status, pet.health - 5)
     else:
         pass
     del todos_health[index]
-    return redirect(url_for("index"))
+    return redirect(url_for("index", pet=pet))
 
 
 """ HAPPINESS: ADD, EDIT, DELETE, CHECK FUNCTIONS """
@@ -90,20 +88,52 @@ def edit_happiness(index):
 @app.route("/check_happiness/<int:index>")
 def check_happiness(index):
     todos_happiness[index]["done"] = not todos_happiness[index]["done"]
-    if counter.max_value > counter.happiness_counter >= counter.min_value:
+    if pet.max_status >= pet.happiness >= pet.min_status:
         if todos_happiness[index]["done"]:
-            counter.happiness_counter += 1
+            pet.happiness = min(pet.max_status, pet.happiness + 5)
         else:
-            counter.happiness_counter -= 1
-    else:
-        pass
-    return redirect(url_for("index", happiness_counter=counter.happiness_counter))
+            pet.happiness = min(pet.max_status, pet.happiness - 5)
+    return redirect(url_for("index", pet=pet))
 
 
 @app.route("/delete_happiness/<int:index>")
 def delete_happiness(index):
+    if todos_happiness[index]["done"]:
+        pet.happiness = min(pet.max_status, pet.happiness - 5)
+    else:
+        pass
     del todos_happiness[index]
-    return redirect(url_for("index"))
+    return redirect(url_for("index", pet=pet))
+
+
+"""
+BUTTONS ROUTES
+"""
+
+
+@app.route("/feed")
+def feed():
+    pet.health = min(pet.max_status, pet.health + 5)
+    return render_template("index.html", pet=pet)
+
+
+@app.route("/water")
+def water():
+    pet.health = min(pet.max_status, pet.health + 5)
+    return render_template("index.html", pet=pet)
+
+
+@app.route("/exercise")
+def exercise():
+    pet.health = min(pet.max_status, pet.health + 10)
+    return render_template("index.html", pet=pet)
+
+
+@app.route("/hug")
+def hug():
+    quote = get_inspo_quote()
+    pet.happiness = min(pet.max_status, pet.happiness + 10)
+    return render_template("index.html", pet=pet, quote=quote)
 
 
 """ RUN APP """

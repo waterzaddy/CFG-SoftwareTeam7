@@ -1,38 +1,23 @@
 """ CLASSES """
 
+
 class VirtualPet:
-    def __init__(self, name):
+    def __init__(self, name, health=100, happiness=100):
         self.name = name
-        self.health = 100
-        self.happiness = 100
+        self.max_status = 60
+        self.min_status = 5
+        self.health = min(self.max_status, max(self.min_status, health))  # Ensure health is within range
+        self.happiness = min(self.max_status, max(self.min_status, happiness))  # Ensure happiness is within range
 
-    def feed(self):
-        self.health += 10
-        return self.health
+    def decay(self):
+        decay_rate = 0.1
+        self.health = max(self.min_status, self.health - decay_rate)
+        self.happiness = max(self.min_status, self.happiness - decay_rate)
 
-    def water(self):
-        self.health += 10
-        return self.health
-
-    def play(self):
-        self.happiness += 10
-        return self.happiness
-
-    def perform_self_care_actions(self, action1=False, action2=False, action3=False):
-        if action1:
-            self.health += 5
-        if action2:
-            self.happiness += 5
-        if action3:
-            self.happiness += 10
-
-    def get_status(self):
-        return {"name": self.name, "health": self.health, "happiness": self.happiness}
-
-
-class Counter:
-    def __init__(self):
-        self.health_counter = 0
-        self.happiness_counter = 0
-        self.max_value = 100
-        self.min_value = 0
+# NOT IN USE FOR NOW
+# class Counter:
+#     def __init__(self):
+#         self.health_counter = 0
+#         self.happiness_counter = 0
+#         self.max_value = 100
+#         self.min_value = 0
