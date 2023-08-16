@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block title %}Self care tracker{% endblock %}
 {% block content %}
+
+{% if "user" in session %}
+<h2>Welcome, {{ user }}</h2>
+{% endif %}
 <h2>Task list for health ❤️</h2>
 <p>Add tasks that have a positive impact on your health. Edit, delete or <b>complete</b> to boost your health score.</p>
 <ul>

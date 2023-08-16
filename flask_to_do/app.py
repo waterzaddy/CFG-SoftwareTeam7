@@ -1,11 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
+from datetime import timedelta
 from classes import VirtualPet
 from functions import get_inspo_quote
-import requests
 
 """ VARIABLES """
 
 app = Flask(__name__, template_folder="templates")
+app.secret_key = "tamagochi"
+app.permanent_session_lifetime = timedelta(days=30)
 
 todos_health = [{"task": "Sample task", "done": False}]
 todos_happiness = [{"task": "Sample task", "done": False}]
@@ -21,7 +23,33 @@ pet = VirtualPet("Your Virtual Pet", health=40, happiness=40)
 
 @app.route("/")
 def index():
-    return render_template("index.html", todos_health=todos_health, todos_happiness=todos_happiness, pet=pet)
+    if "user" in session:
+        user = session["user"]
+        return render_template("index.html", todos_health=todos_health, todos_happiness=todos_happiness, pet=pet, user=user)
+    else:
+        return render_template("index.html", todos_health=todos_health, todos_happiness=todos_happiness, pet=pet)
+
+
+""" LOGIN / LOGOUT / SESSIONS """
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        session.permanent = True
+        user = request.form["nm"]
+        session["user"] = user
+        return redirect(url_for("index"))
+    else:
+        if "user" in session:
+            return redirect(url_for("index"))
+        return render_template("login.html")
+
+
+@app.route("/logout")
+def logout():
+    session.pop("user", None)
+    return redirect(url_for("login"))
 
 
 """ HEALTH: ADD, EDIT, DELETE, CHECK FUNCTIONS"""
@@ -59,8 +87,6 @@ def check_health(index):
 def delete_health(index):
     if todos_health[index]["done"]:
         pet.health = min(pet.max_status, pet.health - 5)
-    else:
-        pass
     del todos_health[index]
     return redirect(url_for("index", pet=pet))
 
@@ -100,8 +126,6 @@ def check_happiness(index):
 def delete_happiness(index):
     if todos_happiness[index]["done"]:
         pet.happiness = min(pet.max_status, pet.happiness - 5)
-    else:
-        pass
     del todos_happiness[index]
     return redirect(url_for("index", pet=pet))
 
