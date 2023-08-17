@@ -60,7 +60,7 @@ def add_health():
             print(todo)
             todos_health.append({"task": todo, "done": False})
         else:
-            flash("Tasks can be max 40 characters")
+            flash("Tasks must be between 1 and 40 characters")
     else:
         flash("You can have a maximum of 10 tasks at the time")
     return redirect(url_for("index"))
@@ -106,7 +106,7 @@ def add_happiness():
             print(todo)
             todos_happiness.append({"task": todo, "done": False})
         else:
-            flash("Tasks can be max 40 characters")
+            flash("Tasks must be between 1 and 40 characters")
     else:
         flash("You can have a maximum of 10 tasks at the time")
     return redirect(url_for("index"))
