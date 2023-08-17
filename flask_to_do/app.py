@@ -1,20 +1,17 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-from datetime import timedelta
 from classes import VirtualPet
-from functions import get_inspirational_quote, todo_length
+from functions import get_inspirational_quote, todo_length, task_length
 
 """ VARIABLES """
 
 app = Flask(__name__, template_folder="templates")
-app.secret_key = "tamagochi"
-app.permanent_session_lifetime = timedelta(days=30)
+app.config.from_object("config.Config")
 
 todos_health = [{"task": "Sample task", "done": False}]
 todos_happiness = [{"task": "Sample task", "done": False}]
 
 """ CLASS INSTANCES """
 
-# creating pet instance. not in use yet (to be used for booster buttons)
 pet = VirtualPet("Your Virtual Pet", health=40, happiness=40)
 
 
@@ -59,7 +56,11 @@ def logout():
 def add_health():
     if todo_length(todos_health):
         todo = request.form["todo"]
-        todos_health.append({"task": todo, "done": False})
+        if task_length(todo):
+            print(todo)
+            todos_health.append({"task": todo, "done": False})
+        else:
+            flash("Tasks can be max 40 characters")
     else:
         flash("You can have a maximum of 10 tasks at the time")
     return redirect(url_for("index"))
@@ -101,8 +102,11 @@ def delete_health(index):
 def add_happiness():
     if todo_length(todos_happiness):
         todo = request.form["todo"]
-        print(todo)
-        todos_happiness.append({"task": todo, "done": False})
+        if task_length(todo):
+            print(todo)
+            todos_happiness.append({"task": todo, "done": False})
+        else:
+            flash("Tasks can be max 40 characters")
     else:
         flash("You can have a maximum of 10 tasks at the time")
     return redirect(url_for("index"))

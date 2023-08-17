@@ -1,1 +1,7 @@
-app.config['MESSAGE_FLASHING_OPTIONS'] = {'duration': 5}
+from datetime import timedelta
+
+
+class Config(object):
+    DEBUG = True
+    SECRET_KEY = "tamagochi"
+    PERMANENT_SESSION_LIFETIME = timedelta(days=30)

@@ -18,14 +18,10 @@ def get_inspirational_quote():
 
 # checks that there are no more than 15 tasks in each to-do list
 def todo_length(todo_list):
-    return len(todo_list) <= 4
+    return len(todo_list) <= 10
 
 
-# def get_valid_tasks(task):
-#     if 0 >= len(task) >= 30:
-#         return True
-#     else:
-#         #print("Sorry, I didn't understand that.")
-#         return False
-#
-# #print(get_valid_tasks("hellooooooooooooooooooooooooooooooooooooooo"))
+# checks that task is not empty and no longer than 40 characters
+def task_length(task):
+    return 0 < len(task) <= 40
+
