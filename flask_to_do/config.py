@@ -1,0 +1,1 @@
+app.config['MESSAGE_FLASHING_OPTIONS'] = {'duration': 5}

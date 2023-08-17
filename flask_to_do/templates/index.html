@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 {% block title %}Self care tracker{% endblock %}
 {% block content %}
-
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-warning" role="alert">
+             {{message}}
+        </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 {% if "user" in session %}
 <h2>Welcome, {{ user }}</h2>
 {% endif %}

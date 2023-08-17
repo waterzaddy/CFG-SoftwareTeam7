@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from datetime import timedelta
 from classes import VirtualPet
-from functions import get_inspo_quote, todo_length
+from functions import get_inspirational_quote, todo_length
 
 """ VARIABLES """
 
@@ -61,7 +61,7 @@ def add_health():
         todo = request.form["todo"]
         todos_health.append({"task": todo, "done": False})
     else:
-        pass
+        flash("You can have a maximum of 10 tasks at the time")
     return redirect(url_for("index"))
 
 
@@ -104,7 +104,7 @@ def add_happiness():
         print(todo)
         todos_happiness.append({"task": todo, "done": False})
     else:
-        pass
+        flash("You can have a maximum of 10 tasks at the time")
     return redirect(url_for("index"))
 
 
@@ -162,7 +162,7 @@ def exercise():
 
 @app.route("/hug")
 def hug():
-    quote = get_inspo_quote()
+    quote = get_inspirational_quote()
     pet.happiness = min(pet.max_status, pet.happiness + 10)
     return render_template("index.html", pet=pet, quote=quote)
 

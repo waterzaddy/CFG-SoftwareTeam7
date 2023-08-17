@@ -1,7 +1,7 @@
 import requests
 
 
-def get_inspo_quote():
+def get_inspirational_quote():
     category = 'inspirational'
     api_url = 'https://api.api-ninjas.com/v1/quotes?category={}'.format(category)
     api_key = 'Zu3DasmIkTOY9/xNQFPEDg==zSkWG4DY0AS1S3Av'
@@ -15,9 +15,10 @@ def get_inspo_quote():
     else:
         return "Error fetching quote"
 
+
 # checks that there are no more than 15 tasks in each to-do list
 def todo_length(todo_list):
-    return len(todo_list) <= 7
+    return len(todo_list) <= 4
 
 
 # def get_valid_tasks(task):
