@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from datetime import timedelta
 from classes import VirtualPet
-from functions import get_inspo_quote
+from functions import get_inspo_quote, todo_length
 
 """ VARIABLES """
 
@@ -57,8 +57,11 @@ def logout():
 
 @app.route("/add_health", methods=["POST"])
 def add_health():
-    todo = request.form["todo"]
-    todos_health.append({"task": todo, "done": False})
+    if todo_length(todos_health):
+        todo = request.form["todo"]
+        todos_health.append({"task": todo, "done": False})
+    else:
+        pass
     return redirect(url_for("index"))
 
 
@@ -96,8 +99,12 @@ def delete_health(index):
 
 @app.route("/add_happiness", methods=["POST"])
 def add_happiness():
-    todo = request.form["todo"]
-    todos_happiness.append({"task": todo, "done": False})
+    if todo_length(todos_happiness):
+        todo = request.form["todo"]
+        print(todo)
+        todos_happiness.append({"task": todo, "done": False})
+    else:
+        pass
     return redirect(url_for("index"))
 
 
