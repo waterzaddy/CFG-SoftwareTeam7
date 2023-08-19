@@ -1,20 +1,17 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-from datetime import timedelta
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from classes import VirtualPet
-from functions import get_inspo_quote
+from functions import get_inspirational_quote, todo_length, task_length
 
 """ VARIABLES """
 
 app = Flask(__name__, template_folder="templates")
-app.secret_key = "tamagochi"
-app.permanent_session_lifetime = timedelta(days=30)
+app.config.from_object("config.Config")
 
 todos_health = [{"task": "Sample task", "done": False}]
 todos_happiness = [{"task": "Sample task", "done": False}]
 
 """ CLASS INSTANCES """
 
-# creating pet instance. not in use yet (to be used for booster buttons)
 pet = VirtualPet("Your Virtual Pet", health=40, happiness=40)
 
 
@@ -57,8 +54,15 @@ def logout():
 
 @app.route("/add_health", methods=["POST"])
 def add_health():
-    todo = request.form["todo"]
-    todos_health.append({"task": todo, "done": False})
+    if todo_length(todos_health):
+        todo = request.form["todo"]
+        if task_length(todo):
+            print(todo)
+            todos_health.append({"task": todo, "done": False})
+        else:
+            flash("Tasks must be between 1 and 40 characters")
+    else:
+        flash("You can have a maximum of 10 tasks at the time")
     return redirect(url_for("index"))
 
 
@@ -96,8 +100,15 @@ def delete_health(index):
 
 @app.route("/add_happiness", methods=["POST"])
 def add_happiness():
-    todo = request.form["todo"]
-    todos_happiness.append({"task": todo, "done": False})
+    if todo_length(todos_happiness):
+        todo = request.form["todo"]
+        if task_length(todo):
+            print(todo)
+            todos_happiness.append({"task": todo, "done": False})
+        else:
+            flash("Tasks must be between 1 and 40 characters")
+    else:
+        flash("You can have a maximum of 10 tasks at the time")
     return redirect(url_for("index"))
 
 
@@ -155,7 +166,7 @@ def exercise():
 
 @app.route("/hug")
 def hug():
-    quote = get_inspo_quote()
+    quote = get_inspirational_quote()
     pet.happiness = min(pet.max_status, pet.happiness + 10)
     return render_template("index.html", pet=pet, quote=quote)
 
