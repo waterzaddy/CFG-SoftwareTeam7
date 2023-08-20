@@ -2,6 +2,9 @@
 // Option A: Include all of Bootstrap
 $primary: #9a35ff;
 
+$progress-bar-bg: #72ff35;
+$progress-bar-color: #000;
+
 // Include any default variable overrides here (though functions won't be available)
 
 @import "../node_modules/bootstrap/scss/bootstrap";
@@ -20,6 +23,22 @@ $primary: #9a35ff;
   color: $primary;
 }
 
-.progress-bar {
-  background-color: #72ff35;
+.parent {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.image1 {
+  max-width: 75%;
+  top: 0;
+  left: 0;
+}
+
+.image2 {
+  max-width: 75%;
+  mix-blend-mode: multiply;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
