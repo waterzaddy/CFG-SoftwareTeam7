@@ -11976,3 +11976,7 @@ textarea.form-control-lg {
   --bs-body-font-family: "IBM Plex Mono",
     monospace;
 }
+
+.bold-purple {
+  color: #9a35ff;
+}
