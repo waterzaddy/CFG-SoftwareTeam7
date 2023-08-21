@@ -19,23 +19,50 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        {% if "user" in session %}
-        <li class="nav-item active">
-          <a class="nav-link" href="{{ url_for('index') }}">My pet <span class="sr-only">(current)</span></a>
-        </li>
-        {% endif %}
-        {% if "user" not in session %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-        </li>
-        {% endif %}
-        {% if "user" in session %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-        </li>
-        {% endif %}
-      </ul>
+      <form class="container-fluid justify-content-start">
+        <ul class="navbar-nav">
+
+          {% if "user" in session %}
+          <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('index') }}">My pet <span class="sr-only">(current)</span></a>
+          </li>
+          {% endif %}
+          {% if "user" not in session %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+          </li>
+          <!-- Modal Login Button -->
+          <li class="nav-item">
+            <a class="nav-link btn btn-primary-outlined" role="button" data-bs-toggle="modal"
+              data-bs-target="#exampleModal" href="{{ url_for('login') }}">Login</a>
+          </li>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" value="submit" class="btn btn-primary">Login</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {% if "user" in session %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+          </li>
+          {% endif %}
+        </ul>
+      </form>
     </div>
   </nav>
 
