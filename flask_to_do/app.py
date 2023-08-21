@@ -178,26 +178,27 @@ BUTTONS ROUTES
 @app.route("/feed")
 def feed():
     pet.health = min(pet.max_status, pet.health + 5)
-    return render_template("index.html", pet=pet)
+    return redirect(url_for("index"))
 
 
 @app.route("/water")
 def water():
     pet.health = min(pet.max_status, pet.health + 5)
-    return render_template("index.html", pet=pet)
+    return redirect(url_for("index"))
 
 
 @app.route("/exercise")
 def exercise():
     pet.health = min(pet.max_status, pet.health + 10)
-    return render_template("index.html", pet=pet)
+    return redirect(url_for("index"))
 
 
 @app.route("/hug")
 def hug():
     quote = get_inspirational_quote()
     pet.happiness = min(pet.max_status, pet.happiness + 10)
-    return render_template("index.html", pet=pet, quote=quote)
+    return render_template("index.html", pet=pet, quote=quote, todos_health=todos_health,
+                           todos_happiness=todos_happiness)
 
 
 """ RUN APP """

@@ -4,7 +4,7 @@
 class VirtualPet:
     def __init__(self, name, health=100, happiness=100):
         self.name = name
-        self.max_status = 60
+        self.max_status = 100
         self.min_status = 5
         self.health = min(self.max_status, max(self.min_status, health))  # Ensure health is within range
         self.happiness = min(self.max_status, max(self.min_status, happiness))  # Ensure happiness is within range
