@@ -28,15 +28,12 @@
           </li>
           {% endif %}
           {% if "user" not in session %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-          </li>
           <!-- Modal Login Button -->
           <li class="nav-item">
             <a class="nav-link btn btn-primary-outlined" role="button" data-bs-toggle="modal"
               data-bs-target="#exampleModal" href="{{ url_for('login') }}">Login</a>
           </li>
-          <!-- Modal -->
+          <!-- Modal Pop Up-->
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
