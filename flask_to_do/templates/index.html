@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% block title %}Self care tracker{% endblock %}
+
+<!-- Flash Alert -->
 {% block content %}
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 {% for message in messages %}
 <!-- NEEDS JAVASCRIPT TO KEEP CURRENT VIEW -->
-<div class="alert alert-warning alert-dismissable fade show" role="alert">
+<div class="alert alert-warning alert-dismissable fade show" id="inputAlert" role="alert">
     {{message}}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </button>
@@ -13,9 +15,17 @@
 {% endfor %}
 {% endif %}
 {% endwith %}
-{% if "user" in session %}
-<h2>Welcome, {{ user }}</h2>
-{% endif %}
+
+<!-- User Session -->
+<div class="user_session">
+    {% if "user" in session %}
+    <h2>Welcome, {{ user }}</h2>
+    {% endif %}
+</div>
+
+
+
+
 
 <section class="main">
     <div class="container pt-3">
@@ -60,7 +70,7 @@
                                     {% endfor %}
                                 </ul>
                                 <form action="{{ url_for('add_health') }}" method="POST">
-                                    <input type="text" name="todo" placeholder="Add new task">
+                                    <input id="heathTaskInput" type="text" name="todo" placeholder="Add new task">
                                     <button type="submit" class="btn btn-primary">Add</button>
                                 </form>
                             </div>
@@ -82,16 +92,19 @@
                                 <ul>
                                     {% for todo in todos_happiness %}
                                     <li>
-                                        <span {% if todo['done'] %} style="text-decoration: line-through" {%endif%}>{{
-                                            todo['task'] }}</span>
-                                        <div class="btn-group justify-content-end btn-group-sm" role="group"
-                                            aria-label="Edit complete delete buttons">
-                                            <a class="btn btn-outline-primary" role="button"
-                                                href="{{ url_for('edit_happiness', index=loop.index0) }}">Edit</a>
-                                            <a class="btn btn-outline-primary" role="button"
-                                                href="{{ url_for('check_happiness', index=loop.index0) }}">Complete</a>
-                                            <a class="btn btn-outline-primary" role="button"
-                                                href="{{ url_for('delete_happiness', index=loop.index0) }}">Delete</a>
+                                        <div class="btn-toolbar mb-3" role="toolbar"
+                                            aria-label="Task item with button group">
+                                            <span {% if todo['done'] %} style="text-decoration: line-through"
+                                                {%endif%}>{{todo['task'] }}</span>
+                                            <div class="btn-group justify-content-end btn-group-sm ms-2" role="group"
+                                                aria-label="Edit complete delete buttons">
+                                                <a class="btn btn-outline-primary" role="button"
+                                                    href="{{ url_for('edit_happiness', index=loop.index0) }}">Edit</a>
+                                                <a class="btn btn-outline-primary" role="button"
+                                                    href="{{ url_for('check_happiness', index=loop.index0) }}">Complete</a>
+                                                <a class="btn btn-outline-primary" role="button"
+                                                    href="{{ url_for('delete_happiness', index=loop.index0) }}">Delete</a>
+                                            </div>
                                         </div>
 
                                     </li>
@@ -99,7 +112,7 @@
 
                                 </ul>
                                 <form action="{{ url_for('add_happiness') }}" method="POST">
-                                    <input type="text" class="flex-fill" name="todo" placeholder="Add new task">
+                                    <input id="happinessTaskInput" type="text" name="todo" placeholder="Add new task">
                                     <button type="submit" class="btn btn-primary">Add</button>
                                 </form>
                             </div>
