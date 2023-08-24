@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+{% block title %}Self care tracker{% endblock %}
+
+<!-- Flash Alert -->
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<!-- NEEDS JAVASCRIPT TO KEEP CURRENT VIEW -->
+<div class="alert alert-warning alert-dismissable fade show" id="inputAlert" role="alert">
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<!-- User Session -->
+<div class="user_session">
+    {% if "user" in session %}
+    <h2>Welcome, {{ user }}</h2>
+    {% endif %}
+</div>
+
+
+
+
+
+<section class="main">
+    <div class="container pt-3">
+        <div class="row align-items-center justify-content-around">
+            <!-- TO Do Lists & Journal -->
+            <div class="col-md-5" id="task-lists">
+                <div class="accordion" id="accordionToDo">
+                    <!-- Health To-Do List -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <strong>TO DO: HEALTH</strong>
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionToDo">
+                            <div class="accordion-body">
+                                <p>Add tasks that have a positive impact on your health. Edit, delete or <strong
+                                        class="bold-purple">complete</strong>
+                                    to boost your health score.</p>
+                                <ul>
+                                    {% for todo in todos_health %}
+                                    <li>
+                                        <div class="btn-toolbar mb-3" role="toolbar"
+                                            aria-label="Task item with button group">
+                                            <div class="task">
+                                                <span {% if todo['done'] %} style="text-decoration: line-through"
+                                                    {%endif%}>{{todo['task'] }}</span>
+                                                <div class="btn-group justify-content-end btn-group-sm" role="group"
+                                                    aria-label="Edit complete delete buttons">
+                                                    <a class="btn btn-outline-primary" role="button"
+                                                        href="{{ url_for('edit_health', index=loop.index0) }}">Edit</a>
+                                                    <a class="btn btn-outline-primary" role="button"
+                                                        href="{{ url_for('check_health', index=loop.index0) }}">Complete</a>
+                                                    <a class="btn btn-outline-primary" role="button"
+                                                        href="{{ url_for('delete_health', index=loop.index0) }}">Delete</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                <form action="{{ url_for('add_health') }}" method="POST">
+                                    <input id="heathTaskInput" type="text" name="todo" placeholder="Add new task">
+                                    <button type="submit" class="btn btn-primary">Add</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Happiness To-Do List -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <strong>TO DO: HAPPINESS</strong>
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionToDo">
+                            <div class="accordion-body">
+                                <p>Add tasks that make you happy. Edit, delete or <strong
+                                        class="bold-purple">complete</strong>
+                                    to boost your happiness score.</p>
+                                <ul>
+                                    {% for todo in todos_happiness %}
+                                    <li>
+                                        <div class="btn-toolbar mb-3" role="toolbar"
+                                            aria-label="Task item with button group">
+                                            <span {% if todo['done'] %} style="text-decoration: line-through"
+                                                {%endif%}>{{todo['task'] }}</span>
+                                            <div class="btn-group justify-content-end btn-group-sm ms-2" role="group"
+                                                aria-label="Edit complete delete buttons">
+                                                <a class="btn btn-outline-primary" role="button"
+                                                    href="{{ url_for('edit_happiness', index=loop.index0) }}">Edit</a>
+                                                <a class="btn btn-outline-primary" role="button"
+                                                    href="{{ url_for('check_happiness', index=loop.index0) }}">Complete</a>
+                                                <a class="btn btn-outline-primary" role="button"
+                                                    href="{{ url_for('delete_happiness', index=loop.index0) }}">Delete</a>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                    {% endfor %}
+
+                                </ul>
+                                <form action="{{ url_for('add_happiness') }}" method="POST">
+                                    <input id="happinessTaskInput" type="text" name="todo" placeholder="Add new task">
+                                    <button type="submit" class="btn btn-primary">Add</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pet & Health Bars -->
+            <div class="col-md-7 text-center">
+                <div class="row justify-content-center">
+                    <div class="col-5 ">
+                        <h5>Health Status:</h5>
+                        <p></p>
+                        <div class="progress border border-3 border-secondary rounded-5" style="height:35px">
+                            <div class="progress-bar" style="width:40%;"><strong>{{ pet.health }}%</strong></div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <h5>Happiness Status:</h5>
+                        <p></p>
+                        <div class="progress border border-3 border-secondary rounded-5" style="height:35px">
+                            <div class="progress-bar" style="width:40%;"><strong>{{ pet.happiness }}%</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inspirational Quote -->
+                <div class="quote pt-3">
+                    {% block quote %}
+                    {% if quote %}
+                    <p><strong class="bold-purple">Quote:</strong> {{ quote }}</p>
+                    {% endif %}
+                    {% endblock %}
+                </div>
+
+                <!-- Pet Image & Buttons -->
+                <div class="parent">
+                    <img src="../static/Assets/Pet_Egg.png" alt="purple egg" class="image1 purple-egg">
+                    <img src="../static/Assets/happy-cat.png" alt="happy cat avatar" class="image2 cat-happy">
+                    <div class="action-buttons">
+                        <a type="button" class="btn btn-default btn-md btn3d" href="/water">
+                            <i class="fa-solid fa-glass-water"></i>
+                        </a>
+                        <a type="button" class="btn btn-default btn-md btn3d" href="/feed">
+                            <i class="fa-solid fa-bowl-food"></i>
+                        </a>
+                        <a type="button" class="btn btn-default btn-md btn3d" href="/hug">
+                            <i class="fa-solid fa-heart"></i>
+                        </a>
+                        <a type="button" class="btn btn-default btn-md btn3d" href="/exercise">
+                            <i class="fa-solid fa-dumbbell"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endblock %}
+
+<!--
+    {% block health %}
+    <b>Health counter:</b> {{ health_counter }}
+    {% endblock %}
+
+    {% block happiness %}
+    <p><b>Happiness counter:</b> {{ happiness_counter }}</p>
+        {% endblock %}
+-->

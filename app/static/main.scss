@@ -1,0 +1,106 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+$primary: #9a35ff;
+
+$progress-bar-bg: #72ff35;
+$progress-bar-color: #000;
+
+// Include any default variable overrides here (though functions won't be available)
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// Then add additional custom code here
+
+// Google fonts
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+:root {
+  --bs-body-font-family: "IBM Plex Mono",
+    monospace;
+}
+
+// Bold purple fontstyle
+.bold-purple {
+  color: $primary;
+}
+
+// Pet image stack & buttons
+.parent {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.image1 {
+  max-width: 60%;
+  top: 0;
+  left: 0;
+}
+
+.image2 {
+  max-width: 60%;
+  mix-blend-mode: multiply;
+  position: absolute;
+  top: 0;
+  left: 125px;
+}
+
+.action-buttons {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.modal {
+  --bs-modal-bg: #ebd7ff;
+  --bs-modal-header-border-color: None;
+  --bs-modal-footer-border-color: None;
+}
+
+.modal-title {
+  color: #3e1566;
+}
+
+// 3D Buttons
+.btn3d {
+  position: relative;
+  top: -6px;
+  border: 0;
+  transition: all 40ms linear;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.btn3d:active:focus,
+.btn3d:focus:hover,
+.btn3d:focus {
+  -moz-outline-style: none;
+  outline: medium none;
+}
+
+.btn3d:active,
+.btn3d.active {
+  top: 2px;
+}
+
+.btn3d.btn-default {
+  color: #666666;
+  box-shadow: 0 0 0 1px #ebebeb inset,
+    0 0 0 2px rgba(255, 255, 255, 0.1) inset,
+    0 8px 0 0 #bebebe,
+    0 8px 8px 1px rgba(0, 0, 0, 0.2);
+  background-color: #f9f9f9;
+}
+
+.btn3d.btn-default:active,
+.btn3d.btn-default.active {
+  color: #666666;
+  box-shadow: 0 0 0 1px #b060ff inset,
+    0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+    0 1px 3px 1px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
