@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="dacbd8bd-9f33-4a61-be0d-c73d55dbb712" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pipfile" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pipfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +34,7 @@
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "flask__to__do",
+    "git-widget-placeholder": "front-end-wip",
     "last_opened_file_path": "C:/Users/Clarita/Desktop/CFG/python",
     "settings.editor.selected.configurable": "preferences.sourceCode.XML"
   }
