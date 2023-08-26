@@ -50,14 +50,17 @@
                         <h5>Health Status:</h5>
                         <p></p>
                         <div class="progress border border-3 border-secondary rounded-5" style="height:35px">
-                            <div class="progress-bar" style="width:40%;"><strong>{{ pet.health }}%</strong></div>
+                            <div class="progress-bar" style="width:{{pet.health}}%"><strong>{{ pet.health }}%</strong>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-5">
                         <h5>Happiness Status:</h5>
                         <p></p>
                         <div class="progress border border-3 border-secondary rounded-5" style="height:35px">
-                            <div class="progress-bar" style="width:40%;"><strong>{{ pet.happiness }}%</strong></div>
+                            <div class="progress-bar" style="width:{{pet.happiness}}%"><strong>{{ pet.happiness
+                                    }}%</strong>
+                            </div>
                         </div>
                     </div>
                 </div>
