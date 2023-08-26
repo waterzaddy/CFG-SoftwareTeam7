@@ -86,6 +86,7 @@
                                     to boost your health score.</p>
                                 <ul>
                                     {% for todo in todos_health %}
+                                    {% include 'includes/edit_task_modal.html'%}
                                     <li>
                                         <div class="btn-toolbar mb-3" role="toolbar"
                                             aria-label="Task item with button group">
@@ -95,7 +96,8 @@
                                                 <div class="btn-group justify-content-end btn-group-sm" role="group"
                                                     aria-label="Edit complete delete buttons">
                                                     <a class="btn btn-outline-primary" role="button"
-                                                        data-bs-toggle="modal" data-bs-target="#editHealthModal"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editTaskModal-{{ todo['task'] }}"
                                                         href="{{ url_for('edit_health', index=loop.index0) }}">Edit</a>
                                                     <a class="btn btn-outline-primary" role="button"
                                                         href="{{ url_for('check_health', index=loop.index0) }}">Complete</a>
@@ -108,7 +110,7 @@
                                     </li>
 
                                     <!-- Modal for Edit Health Task-->
-                                    <div class="modal fade" id="editHealthModal" tabindex="-1"
+                                    <!-- <div class="modal fade" id="editHealthModal" tabindex="-1"
                                         aria-labelledby="editHealthModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -127,7 +129,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     {% endfor %}
                                 </ul>
                                 <form action="{{ url_for('add_health') }}" method="POST">
@@ -153,6 +155,7 @@
                                     to boost your happiness score.</p>
                                 <ul>
                                     {% for todo in todos_happiness %}
+                                    {% include 'includes/edit_task_modal.html'%}
                                     <li>
                                         <div class="btn-toolbar mb-3" role="toolbar"
                                             aria-label="Task item with button group">
@@ -161,7 +164,7 @@
                                             <div class="btn-group justify-content-end btn-group-sm ms-2" role="group"
                                                 aria-label="Edit complete delete buttons">
                                                 <a class="btn btn-outline-primary" role="button" data-bs-toggle="modal"
-                                                    data-bs-target="#editHappinessModal"
+                                                    data-bs-target="#editTaskModal-{{ todo['task'] }}"
                                                     href="{{ url_for('edit_happiness', index=loop.index0) }}">Edit</a>
                                                 <a class="btn btn-outline-primary" role="button"
                                                     href="{{ url_for('check_happiness', index=loop.index0) }}">Complete</a>
@@ -172,7 +175,7 @@
                                     </li>
 
                                     <!-- Modal for Edit Happiness Task-->
-                                    <div class="modal fade" id="editHappinessModal" tabindex="-1"
+                                    <!-- <div class="modal fade" id="editHappinessModal" tabindex="-1"
                                         aria-labelledby="editHappinessModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -191,7 +194,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     {% endfor %}
                                 </ul>
                                 <form action="{{ url_for('add_happiness') }}" method="POST">
