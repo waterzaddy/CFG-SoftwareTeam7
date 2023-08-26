@@ -14,9 +14,11 @@ def get_inspirational_quote():
             random_quote = quote_data[0]['quote']
             return random_quote
         else:
-            return "Error fetching quote"
+            return "Oops! The universe forgot to send an inspiring message. " \
+                   "Don't worry, your virtual pet is here to keep you motivated!"
     except Exception as e:
-        return "An error occurred while fetching a quote: " + str(e)
+        return "Oops! Our virtual inspo guru got a bit tired. We'll get them back on track. " \
+               "In the meantime, give your pet a hug!: " + str(e)
 
 
 

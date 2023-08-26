@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+    <style>
+        body {
+            font-family: "IBM Plex Mono", monospace;
+        }
+        .error-container {
+            text-align: center;
+            margin: 50px auto;
+            max-width: 1000px; /* Set a maximum width for the container */
+        }
+        .error-image {
+            max-width: 200px; /* Adjust the width of the image */
+            max-height: 200px; /* Adjust the height of the image */
+            margin: 20px auto;
+        }
+        .bold-purple {
+            font-size: 36px; /* Adjust the font size for the bold text */
+        }
+        .bold-purple p {
+            font-size: 18px; /* Adjust the font size for paragraphs */
+        }
+        .bold-purple h1 {
+            font-size: 36px; /* Adjust the font size for heading elements */
+        }
+    </style>
+</head>
+<body>
+    <div class="container error-container">
+        <h1 class="bold-purple">Uh-oh, we hit a snag! 🐾</h1>
+        <p class="bold-purple">Looks like something went a little haywire in the virtual pet world. Our pets are notorious for causing mischief. 🐶🐱</p>
+        <div class="parent">
+            <img class="image1 error-image" src="{{ url_for('static', filename='assets/unhappy-cat.png') }}" alt="Unhappy Cat">
+        </div>
+        <p class="bold-purple">No worries, our tech-savvy team of virtual pet whisperers are on it. Meanwhile, why not give your real pet some extra love? 🐾🐕🐈</p>
+        <p class="bold-purple">Feel free to try again🐾</p>
+    </div>
+</body>
+</html>
