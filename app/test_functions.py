@@ -27,7 +27,7 @@ class TestTaskLength(unittest.TestCase):
 
     # boundary case
     def test_task_max_length(self):
-        task_test2 = "Lorem ipsum dolor sit amet, consectetur"
+        task_test2 = "Lorem ipsum dolor sit amet, consectetur."
         self.assertTrue(task_length(task_test2))
 
     # invalid case
