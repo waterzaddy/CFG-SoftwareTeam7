@@ -28,8 +28,12 @@ def scheduled_decay():
     pet.decay()
 
 
-# Add scheduled decay task to run every 30 minutes
-scheduler.add_job(scheduled_decay, trigger='interval', minutes=30)
+try:
+    # Add scheduled decay task to run every 30 minutes
+    scheduler.add_job(scheduled_decay, trigger='interval', minutes=30)
+except Exception as e:
+    print("Ooops! Something went wrong when monitoring your pet's vitals over time:", e)
+
 
 """ APP ROUTES """
 
@@ -83,16 +87,23 @@ def logout():
 
 @app.route("/add_health", methods=["POST"])
 def add_health():
-    if todo_length(todos_health):
-        todo = request.form["todo"]
-        if task_length(todo):
-            print(todo)
-            todos_health.append({"task": todo, "done": False})
+    try:
+        if todo_length(todos_health):
+            todo = request.form["todo"]
+            if task_length(todo):
+                print(todo)
+                todos_health.append({"task": todo, "done": False})
+            else:
+                flash("Tasks must be between 1 and 40 characters")
         else:
-            flash("Tasks must be between 1 and 40 characters")
-    else:
-        flash("You can have a maximum of 10 tasks at the time")
+            flash("You can have a maximum of 10 tasks at the time")
+    except Exception as e:
+        # Handle any exceptions that might occur and provide a user-friendly error message
+        error_message = "Ooops! An error occurred: " + str(e)
+        flash(error_message, "error")
+
     return redirect(url_for("index"))
+
 
 
 @app.route("/edit_health/<int:index>", methods=["GET", "POST"])
@@ -129,16 +140,23 @@ def delete_health(index):
 
 @app.route("/add_happiness", methods=["POST"])
 def add_happiness():
-    if todo_length(todos_happiness):
-        todo = request.form["todo"]
-        if task_length(todo):
-            print(todo)
-            todos_happiness.append({"task": todo, "done": False})
+    try:
+        if todo_length(todos_happiness):
+            todo = request.form["todo"]
+            if task_length(todo):
+                print(todo)
+                todos_happiness.append({"task": todo, "done": False})
+            else:
+                flash("Tasks must be between 1 and 40 characters")
         else:
-            flash("Tasks must be between 1 and 40 characters")
-    else:
-        flash("You can have a maximum of 10 tasks at the time")
+            flash("You can have a maximum of 10 tasks at the time")
+    except Exception as e:
+        # Handle any exceptions that might occur and provide a user-friendly error message
+        error_message = "Ooops! An error occurred: " + str(e)
+        flash(error_message, "error")
+
     return redirect(url_for("index"))
+
 
 
 @app.route("/edit_happiness/<int:index>", methods=["GET", "POST"])
