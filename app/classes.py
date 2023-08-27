@@ -19,11 +19,3 @@ class VirtualPet:
         self.health = max(self.min_status, self.health - decay_amount)
         self.happiness = max(self.min_status, self.happiness - decay_amount)
 
-
-# NOT IN USE FOR NOW
-# class Counter:
-#     def __init__(self):
-#         self.health_counter = 0
-#         self.happiness_counter = 0
-#         self.max_value = 100
-#         self.min_value = 0

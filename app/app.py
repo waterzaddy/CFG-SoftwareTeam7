@@ -9,8 +9,8 @@ from datetime import datetime
 app = Flask(__name__, template_folder="templates")
 app.config.from_object("config.Config")
 
-todos_health = [{"task": "Sample task", "done": False}]
-todos_happiness = [{"task": "Sample task", "done": False}]
+todos_health = [{"task": "Sample task", "complete": False}]
+todos_happiness = [{"task": "Sample task", "complete": False}]
 
 # Initialize APScheduler for background decay while app is running
 scheduler = BackgroundScheduler()
@@ -82,7 +82,7 @@ def logout():
     return redirect(url_for("login"))
 
 
-""" HEALTH: ADD, EDIT, DELETE, CHECK FUNCTIONS"""
+""" HEALTH: ADD, EDIT, DELETE, COMPLETE FUNCTIONS"""
 
 
 @app.route("/add_health", methods=["POST"])
@@ -92,7 +92,7 @@ def add_health():
             todo = request.form["todo"]
             if task_length(todo):
                 print(todo)
-                todos_health.append({"task": todo, "done": False})
+                todos_health.append({"task": todo, "complete": False})
             else:
                 flash("Tasks must be between 1 and 40 characters")
         else:
@@ -105,7 +105,6 @@ def add_health():
     return redirect(url_for("index"))
 
 
-
 @app.route("/edit_health/<int:index>", methods=["GET", "POST"])
 def edit_health(index):
     todo = todos_health[index]
@@ -116,11 +115,11 @@ def edit_health(index):
         return render_template("edit_health.html", todo=todo, index=index)
 
 
-@app.route("/check_health/<int:index>")
-def check_health(index):
-    todos_health[index]["done"] = not todos_health[index]["done"]
+@app.route("/complete_health/<int:index>")
+def complete_health(index):
+    todos_health[index]["complete"] = not todos_health[index]["complete"]
     if pet.max_status >= pet.health >= pet.min_status:
-        if todos_health[index]["done"]:
+        if todos_health[index]["complete"]:
             pet.health = min(pet.max_status, pet.health + 5)
         else:
             pet.health = min(pet.max_status, pet.health - 5)
@@ -129,13 +128,13 @@ def check_health(index):
 
 @app.route("/delete_health/<int:index>")
 def delete_health(index):
-    if todos_health[index]["done"]:
+    if todos_health[index]["complete"]:
         pet.health = min(pet.max_status, pet.health - 5)
     del todos_health[index]
     return redirect(url_for("index", pet=pet))
 
 
-""" HAPPINESS: ADD, EDIT, DELETE, CHECK FUNCTIONS """
+""" HAPPINESS: ADD, EDIT, DELETE, COMPLETE FUNCTIONS """
 
 
 @app.route("/add_happiness", methods=["POST"])
@@ -145,7 +144,7 @@ def add_happiness():
             todo = request.form["todo"]
             if task_length(todo):
                 print(todo)
-                todos_happiness.append({"task": todo, "done": False})
+                todos_happiness.append({"task": todo, "complete": False})
             else:
                 flash("Tasks must be between 1 and 40 characters")
         else:
@@ -169,11 +168,11 @@ def edit_happiness(index):
         return render_template("edit_happiness.html", todo=todo, index=index)
 
 
-@app.route("/check_happiness/<int:index>")
-def check_happiness(index):
-    todos_happiness[index]["done"] = not todos_happiness[index]["done"]
+@app.route("/complete_happiness/<int:index>")
+def complete_happiness(index):
+    todos_happiness[index]["complete"] = not todos_happiness[index]["complete"]
     if pet.max_status >= pet.happiness >= pet.min_status:
-        if todos_happiness[index]["done"]:
+        if todos_happiness[index]["complete"]:
             pet.happiness = min(pet.max_status, pet.happiness + 5)
         else:
             pet.happiness = min(pet.max_status, pet.happiness - 5)
@@ -182,7 +181,7 @@ def check_happiness(index):
 
 @app.route("/delete_happiness/<int:index>")
 def delete_happiness(index):
-    if todos_happiness[index]["done"]:
+    if todos_happiness[index]["complete"]:
         pet.happiness = min(pet.max_status, pet.happiness - 5)
     del todos_happiness[index]
     return redirect(url_for("index", pet=pet))
