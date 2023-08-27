@@ -5,18 +5,19 @@ from functions import todo_length, task_length
 class TestTodoListLength(unittest.TestCase):
     # valid case
     def test_todo_valid_length(self):
-        todo_list_test = [{"task1": "Sample task", "done": False}, {"task2": "Sample task", "done": False}, {"task3": "Sample task", "done": False}, {"task4": "Sample task", "done": False}, {"task5": "Sample task", "done": False}, {"task6": "Sample task", "done": False}, {"task7": "Sample task8", "done": False}, {"task9": "Sample task", "done": False}]
+        todo_list_test = [{"task1": "Sample task", "complete": False}, {"task2": "Sample task", "complete": False}, {"task3": "Sample task", "complete": False}, {"task4": "Sample task", "complete": False}, {"task5": "Sample task", "complete": False}, {"task6": "Sample task", "complete": False}, {"task7": "Sample task8", "complete": False}, {"task9": "Sample task", "complete": False}]
         self.assertTrue(todo_length(todo_list_test))  # add assertion here
 
     # boundary case
     def test_todo_max_length(self):
-        todo_list_test2 = [{"task1": "Sample task", "done": False}, {"task2": "Sample task", "done": False}, {"task3": "Sample task", "done": False}, {"task4": "Sample task", "done": False}, {"task5": "Sample task", "done": False}, {"task6": "Sample task", "done": False}, {"task7": "Sample task", "done": False}, {"task8": "Sample task", "done": False}, {"task9": "Sample task", "done": False}, {"task10": "Sample task", "done": False}]
+        todo_list_test2 = [{"task1": "Sample task", "complete": False}, {"task2": "Sample task", "complete": False}, {"task3": "Sample task", "complete": False}, {"task4": "Sample task", "complete": False}, {"task5": "Sample task", "complete": False}, {"task6": "Sample task", "complete": False}, {"task7": "Sample task", "complete": False}, {"task8": "Sample task", "complete": False}, {"task9": "Sample task", "complete": False}]
         self.assertTrue(todo_length(todo_list_test2))
 
     # invalid case
     def test_todo_too_long(self):
-        todo_list_test2 = [{"task1": "Sample task", "done": False}, {"task2": "Sample task", "done": False}, {"task3": "Sample task", "done": False}, {"task4": "Sample task", "done": False}, {"task5": "Sample task", "done": False}, {"task6": "Sample task", "done": False}, {"task7": "Sample task", "done": False}, {"task8": "Sample task", "done": False}, {"task9": "Sample task", "done": False}, {"task10": "Sample task", "done": False}, {"task11": "Sample task", "done": False}]
+        todo_list_test2 = [{"task1": "Sample task", "complete": False}, {"task2": "Sample task", "complete": False}, {"task3": "Sample task", "complete": False}, {"task4": "Sample task", "complete": False}, {"task5": "Sample task", "complete": False}, {"task6": "Sample task", "complete": False}, {"task7": "Sample task", "complete": False}, {"task8": "Sample task", "complete": False}, {"task9": "Sample task", "complete": False}, {"task10": "Sample task", "complete": False}, {"task11": "Sample task", "complete": False}]
         self.assertEqual(False, todo_length(todo_list_test2))
+
 
 class TestTaskLength(unittest.TestCase):
 
