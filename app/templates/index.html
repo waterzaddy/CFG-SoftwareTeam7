@@ -6,7 +6,7 @@
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 {% for message in messages %}
-<!-- NEEDS JAVASCRIPT TO KEEP CURRENT VIEW -->
+
 <div class="alert alert-warning alert-dismissable fade show" id="inputAlert" role="alert">
     {{message}}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -16,12 +16,7 @@
 {% endif %}
 {% endwith %}
 
-<!-- User Session -->
-<div class="user_session">
-    {% if "user" in session %}
-    <h2>Welcome, {{ user }}</h2>
-    {% endif %}
-</div>
+
 
 
 
@@ -48,7 +43,6 @@
                 <div class="row justify-content-center">
                     <div class="col-md-5">
                         <h5>Health Status:</h5>
-                        <p></p>
                         <div class="progress border border-3 border-secondary rounded-5" style="height:35px">
                             <div class="progress-bar" style="width:{{pet.health}}%"><strong>{{ pet.health }}%</strong>
                             </div>
@@ -56,7 +50,6 @@
                     </div>
                     <div class="col-md-5">
                         <h5>Happiness Status:</h5>
-                        <p></p>
                         <div class="progress border border-3 border-secondary rounded-5" style="height:35px">
                             <div class="progress-bar" style="width:{{pet.happiness}}%"><strong>{{ pet.happiness
                                     }}%</strong>
@@ -89,7 +82,6 @@
                                     to boost your health score.</p>
                                 <ul>
                                     {% for todo in todos_health %}
-                                    {% include 'includes/edit_task_modal.html'%}
                                     <li>
                                         <div class="btn-toolbar mb-3" role="toolbar"
                                             aria-label="Task item with button group">
@@ -99,8 +91,6 @@
                                                 <div class="btn-group justify-content-end btn-group-sm" role="group"
                                                     aria-label="Edit complete delete buttons">
                                                     <a class="btn btn-outline-primary" role="button"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#editTaskModal-{{ todo['task'] }}"
                                                         href="{{ url_for('edit_health', index=loop.index0) }}">Edit</a>
                                                     <a class="btn btn-outline-primary" role="button"
                                                         href="{{ url_for('check_health', index=loop.index0) }}">Complete</a>
@@ -111,28 +101,6 @@
 
                                         </div>
                                     </li>
-
-                                    <!-- Modal for Edit Health Task-->
-                                    <!-- <div class="modal fade" id="editHealthModal" tabindex="-1"
-                                        aria-labelledby="editHealthModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Task</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close">
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form action="{{ url_for('edit_health', index=loop.index0) }}"
-                                                        method="post">
-                                                        <input type="text" name="todo" value="{{ todo['task'] }}">
-                                                        <button type="submit" class="btn btn-primary">Save</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                     {% endfor %}
                                 </ul>
                                 <form action="{{ url_for('add_health') }}" method="POST">
@@ -156,9 +124,10 @@
                                 <p>Add tasks that make you happy. Edit, delete or <strong
                                         class="bold-purple">complete</strong>
                                     to boost your happiness score.</p>
+
                                 <ul>
                                     {% for todo in todos_happiness %}
-                                    {% include 'includes/edit_task_modal.html'%}
+
                                     <li>
                                         <div class="btn-toolbar mb-3" role="toolbar"
                                             aria-label="Task item with button group">
@@ -166,8 +135,7 @@
                                                 {%endif%}>{{todo['task'] }}</span>
                                             <div class="btn-group justify-content-end btn-group-sm ms-2" role="group"
                                                 aria-label="Edit complete delete buttons">
-                                                <a class="btn btn-outline-primary" role="button" data-bs-toggle="modal"
-                                                    data-bs-target="#editTaskModal-{{ todo['task'] }}"
+                                                <a class="btn btn-outline-primary" role="button"
                                                     href="{{ url_for('edit_happiness', index=loop.index0) }}">Edit</a>
                                                 <a class="btn btn-outline-primary" role="button"
                                                     href="{{ url_for('check_happiness', index=loop.index0) }}">Complete</a>
@@ -176,28 +144,6 @@
                                             </div>
                                         </div>
                                     </li>
-
-                                    <!-- Modal for Edit Happiness Task-->
-                                    <!-- <div class="modal fade" id="editHappinessModal" tabindex="-1"
-                                        aria-labelledby="editHappinessModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Task</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close">
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form action="{{ url_for('edit_happiness', index=loop.index0) }}"
-                                                        method="post">
-                                                        <input type="text" name="todo" value="{{ todo['task'] }}">
-                                                        <button type="submit" class="btn btn-primary">Save</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                     {% endfor %}
                                 </ul>
                                 <form action="{{ url_for('add_happiness') }}" method="POST">
