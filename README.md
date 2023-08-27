@@ -60,7 +60,7 @@ To set up and enjoy KokoroZen, use the following steps:
 
 ## How To Use
 
-- Register or Login
+- Login
 - Populate the Heath and Happiness To-Do lists with tasks you wish to accomplish
 - Complete tasks to add to your Pet's health
 - Quickly log eating healthy, drinking water or exercising by pressing the buttons on the Virtual Pet.
