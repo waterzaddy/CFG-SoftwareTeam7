@@ -60,17 +60,15 @@ To set up and enjoy KokoroZen, use the following steps:
 
 ## Run the app
 
-1. For a smooth experience, please use VS Code or PyCharm, MySQLWorkbench and of course Chrome as your browser.
+1. Navigate to the folder of the cloned repository on your local machine, navigate to the app.py file in the app folder and open it in PyCharm or VS Code. 
 
-2. Navigate to the folder of the cloned repository on your local machine, navigate to the app.py file in the app folder and open it in PyCharm or VS Code. 
-
-3. Navigate to the project directory:
+2. Navigate to the project directory:
 ​
     ```bash
     CFG-SoftwareTeam7
     ```
 
-4. Using Terminal, run app.py, this will create a link to copy into Chrome where the homepage will load.​
+3. Using Terminal, run app.py, this will create a link to copy into Chrome where the homepage will load.​
 
 ## How To Use
 
