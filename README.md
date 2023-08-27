@@ -18,7 +18,7 @@ Encourage frequent use through an easy to use and visually appealing user experi
 
 - Food, Drink & Exersize Buttons: Users can quickly log when they have drank water, eaten healthy, or exersized with the pet's buttons. When clicked they add to the pet's health bar percentage.
 
-- Register or Log In: Users can register as a new user and create their own account using a username, email address, and secure password.
+- Log In: Users can register as a new user by entering their username.
 
 - User Sessions: Users sessions are saved so they can come back any time to log new tasks, complete, delete, or edit tasks.
 
