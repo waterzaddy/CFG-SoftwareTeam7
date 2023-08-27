@@ -70,15 +70,7 @@ To set up and enjoy KokoroZen, use the following steps:
     CFG-SoftwareTeam7
     ```
 
-4. Open mySQL, connect to your local instance.
-
-5. Run the script in XXXXXX.sql ensuring that the database has been created and is being used
-
-4. Open app.py from the src folder and edit this line:
-
-   DATABASE_URL = 'mysql+pymysql://root:YOUR_PASSWORD_HERE@localhost/Smart_Eats_db' with your local host password
-
-5. Using Terminal, run app.py, this will create a link to copy into Chrome where the homepage will load.​
+4. Using Terminal, run app.py, this will create a link to copy into Chrome where the homepage will load.​
 
 ## How To Use
 
