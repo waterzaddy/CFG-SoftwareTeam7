@@ -13,70 +13,51 @@
 
   <!-- Fontawesome Icons -->
   <script src="https://kit.fontawesome.com/05f790463b.js" crossorigin="anonymous"></script>
-  
+
   <title>{% block title %} {% endblock %}</title>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <!--<a class="navbar-brand" href="#">Navbar</a> -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <form class="container-fluid justify-content-start">
-        <ul class="navbar-nav">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <!-- Menu Hamburger if page window is small -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-          {% if "user" in session %}
+      <!-- Navbar items -->
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- User in session -->
           <li class="nav-item active">
-            <a class="nav-link" href="{{ url_for('index') }}">My pet <span class="sr-only">(current)</span></a>
-          </li>
-          {% endif %}
-          {% if "user" not in session %}
-          <!-- Modal Login Button -->
-          <li class="nav-item">
-            <a class="nav-link btn btn-primary-outlined" role="button" data-bs-toggle="modal"
-              data-bs-target="#exampleModal" href="{{ url_for('login') }}">Login</a>
-          </li>
-          <!-- Modal Pop Up-->
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Please Login</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body form-floating mb-3">
-                  <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">Email address</label>
-                  </div>
-                  <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" value="submit" class="btn btn-primary">Login</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endif %}
-          {% if "user" in session %}
-          <li class="nav-item">
+            {% if "user" in session %}
             <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
           </li>
-          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('index') }}">My pet <span class="sr-only">(current)</span></a>
+            {% endif %}
+          </li>
+          <!-- User not in session -->
+          <li class="nav-item">
+            {% if "user" not in session %}
+            <a class="nav-link btn btn-primary-outlined" role="button" href="{{ url_for('login') }}">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-primary-outlined" role="button" href="{{ url_for('login') }}">Login</a>
+            {% endif %}
+          </li>
         </ul>
-      </form>
+        <!-- User Session -->
+        <span class="user_session navbar-brand pe-3">
+          {% if "user" in session %}
+          <h4>Welcome, {{ user }}</h4>
+          {% endif %}
+        </span>
+      </div>
     </div>
   </nav>
-
   {% block content %}
 
   {% endblock %}

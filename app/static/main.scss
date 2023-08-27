@@ -52,16 +52,6 @@ $progress-bar-color: #000;
   -ms-transform: translate(-50%, -50%);
 }
 
-.modal {
-  --bs-modal-bg: #ebd7ff;
-  --bs-modal-header-border-color: None;
-  --bs-modal-footer-border-color: None;
-}
-
-.modal-title {
-  color: #3e1566;
-}
-
 // 3D Buttons
 .btn3d {
   position: relative;
@@ -104,3 +94,10 @@ $progress-bar-color: #000;
   background-color: #f9f9f9;
 }
 
+// edit health/happiness css
+
+.edit-task {
+  background-color: #ebd7ff;
+  border-color: #bebebe;
+  padding: 2em 0 5em 2.5em;
+}

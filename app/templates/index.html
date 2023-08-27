@@ -6,7 +6,7 @@
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 {% for message in messages %}
-<!-- NEEDS JAVASCRIPT TO KEEP CURRENT VIEW -->
+
 <div class="alert alert-warning alert-dismissable fade show" id="inputAlert" role="alert">
     {{message}}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -16,12 +16,7 @@
 {% endif %}
 {% endwith %}
 
-<!-- User Session -->
-<div class="user_session">
-    {% if "user" in session %}
-    <h2>Welcome, {{ user }}</h2>
-    {% endif %}
-</div>
+
 
 
 
@@ -29,10 +24,49 @@
 
 <section class="main">
     <div class="container pt-3">
+        <!-- Row for Inspirational Quote & Health/Happiness Bars -->
+        <div class="row justify-content-center">
+
+            <!-- Inspirational Quote -->
+            <div class="col-md-5" id="task-lists">
+                <div class="quote pt-5">
+                    {% block quote %}
+                    {% if quote %}
+                    <p><strong class="bold-purple">Quote:</strong> {{ quote }}</p>
+                    {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+
+            <!-- Health & Happiness Bars -->
+            <div class="col-md-7 mb-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <h5>Health Status:</h5>
+                        <div class="progress border border-3 border-secondary rounded-5" style="height:35px">
+                            <div class="progress-bar" style="width:{{pet.health}}%"><strong>{{ pet.health }}%</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <h5>Happiness Status:</h5>
+                        <div class="progress border border-3 border-secondary rounded-5" style="height:35px">
+                            <div class="progress-bar" style="width:{{pet.happiness}}%"><strong>{{ pet.happiness
+                                    }}%</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row for To-Do Lists & Pet Egg Image -->
         <div class="row align-items-center justify-content-around">
-            <!-- TO Do Lists & Journal -->
+
+            <!-- TO Do Lists -->
             <div class="col-md-5" id="task-lists">
                 <div class="accordion" id="accordionToDo">
+
                     <!-- Health To-Do List -->
                     <div class="accordion-item">
                         <h2 class="accordion-header">
@@ -76,6 +110,7 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- Happiness To-Do List -->
                     <div class="accordion-item">
                         <h2 class="accordion-header">
@@ -89,8 +124,10 @@
                                 <p>Add tasks that make you happy. Edit, delete or <strong
                                         class="bold-purple">complete</strong>
                                     to boost your happiness score.</p>
+
                                 <ul>
                                     {% for todo in todos_happiness %}
+
                                     <li>
                                         <div class="btn-toolbar mb-3" role="toolbar"
                                             aria-label="Task item with button group">
@@ -106,10 +143,8 @@
                                                     href="{{ url_for('delete_happiness', index=loop.index0) }}">Delete</a>
                                             </div>
                                         </div>
-
                                     </li>
                                     {% endfor %}
-
                                 </ul>
                                 <form action="{{ url_for('add_happiness') }}" method="POST">
                                     <input id="happinessTaskInput" type="text" name="todo" placeholder="Add new task">
@@ -121,35 +156,8 @@
                 </div>
             </div>
 
-            <!-- Pet & Health Bars -->
+            <!-- Pet Image & Buttons -->
             <div class="col-md-7 text-center">
-                <div class="row justify-content-center">
-                    <div class="col-5 ">
-                        <h5>Health Status:</h5>
-                        <p></p>
-                        <div class="progress border border-3 border-secondary rounded-5" style="height:35px">
-                            <div class="progress-bar" style="width:40%;"><strong>{{ pet.health }}%</strong></div>
-                        </div>
-                    </div>
-                    <div class="col-5">
-                        <h5>Happiness Status:</h5>
-                        <p></p>
-                        <div class="progress border border-3 border-secondary rounded-5" style="height:35px">
-                            <div class="progress-bar" style="width:40%;"><strong>{{ pet.happiness }}%</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Inspirational Quote -->
-                <div class="quote pt-3">
-                    {% block quote %}
-                    {% if quote %}
-                    <p><strong class="bold-purple">Quote:</strong> {{ quote }}</p>
-                    {% endif %}
-                    {% endblock %}
-                </div>
-
-                <!-- Pet Image & Buttons -->
                 <div class="parent">
                     <img src="../static/Assets/Pet_Egg.png" alt="purple egg" class="image1 purple-egg">
                     <img src="../static/Assets/happy-cat.png" alt="happy cat avatar" class="image2 cat-happy">
@@ -166,13 +174,11 @@
                         <a type="button" class="btn btn-default btn-md btn3d" href="/exercise">
                             <i class="fa-solid fa-dumbbell"></i>
                         </a>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </section>
 {% endblock %}
 
