@@ -1,6 +1,3 @@
-![Alt Screenshots](../CFG-SoftwareTeam7/app/static/Assets/KokoroZen_logo.svg)
-​
-
 ## Introduction
 
 KokoroZen is a virtial pet wellness app. This web application merges the joy of caring for a virtual pet with the importance of self-care. Users can nurture a virtual character while exploring various self-care activities, transforming self-care into an engaging journey.
@@ -11,15 +8,6 @@ Provide a playful and interactive app in the form of a virtual pet to take care 
 
 Encourage frequent use through an easy to use and visually appealing user experience, transforming self-care into an engaging journey holding users accountable.
 ​
-​
-
-## Screenshots
-
-​
-![Alt Screenshots](../CFG-SoftwareTeam7/app/static/Assets/KokoroZen-Home.png)
-
-
-
 ## Key Features
 
 - Health & Happiness Tasks: KokoroZen helps users create a to-do list that affect their health an happiness.
